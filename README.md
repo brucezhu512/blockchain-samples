@@ -1,4 +1,4 @@
-# Blockchain Samples  [![Build Status](https://travis.ibm.com/Suncorp-Innovation-Team/blockchain-samples.svg?token=pchvRZibuLyfLawfRAZB&branch=master)](https://travis.ibm.com/Suncorp-Innovation-Team/blockchain-samples)
+# Blockchain Samples  [![Build Status](https://travis-ci.org/brucezhu512/blockchain-samples.svg?branch=master)](https://travis-ci.org/brucezhu512/blockchain-samples)
 
 ## Description
 This is the repository for building experimental blockchain samples.
