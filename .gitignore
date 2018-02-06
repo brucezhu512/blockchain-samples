@@ -54,6 +54,20 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
+########## Project ##########
+# bin
+bin/
 
+########## Pilot ##########
+# PoC fabric network artifacts folders
+pilot/crypto-config/
+pilot/channel-artifacts/
+
+# CA
+pilot/base/ca-base\.yaml
+
+# fabric client keystore
+pilot/clients/hfc-key-store/
+
+# npm package.json 
+pilot/package-lock.json

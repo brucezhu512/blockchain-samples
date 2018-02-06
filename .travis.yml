@@ -1,0 +1,38 @@
+sudo: requried
+
+language: node_js
+node_js:
+  - "8"
+
+services:
+  - docker
+
+install:
+  - test -d "bin" || mkdir -p "bin" && cp ./tools/linux/* "bin" # Use linux bin files
+  - ./install-docker-images.sh
+
+
+script:
+  - pwd
+  - ls -al
+
+  # Test pilot e2e cases
+  - cd pilot
+  - npm install
+  - ./start-network.sh
+  - node run-client-node-e2e.js
+  - ./run-client-http-e2e.sh
+  - ./stop-network.sh
+  - cd ..
+
+cache:
+  directories:
+    - "pilot/node_modules"
+
+notifications:
+  slack:
+    rooms:
+      - suncorpinnovationteam:gX1g6h2zJpvF4T7zbifoVfUn
+    on_pull_requests: false
+    on_success: change # default: always
+    on_failure: always # default: always

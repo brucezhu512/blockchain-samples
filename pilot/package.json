@@ -1,0 +1,28 @@
+{
+  "name": "motor-claims",
+  "version": "1.0.0",
+  "description": "Hyperledger Fabric Motor Claims Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "fabric-ca-client": "^1.0.2",
+    "fabric-client": "^1.0.2",
+    "grpc": "^1.6.0",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "log4js": "^0.6.38"
+  },
+  "author": "IBM CIC FSS ROW - Suncorp Innovation Team",
+  "license": "Apache-2.0",
+  "keywords": [
+    "Hyperledger",
+    "Fabric",
+    "Claim",
+    "Insurance",
+    "Application"
+  ]
+}
