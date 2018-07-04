@@ -4,7 +4,7 @@
 This is the repository for building experimental blockchain samples.
 
 ## Prerequisites
-Please install Fabric v1.0.4 docker images and binary command tools by following instructions before running any blockchain sample.
+Please install Fabric v1.0.6 docker images and binary command tools by following instructions before running any blockchain sample.
 
 ```bash
 # Copy binary files for MacOS, and please make sure you run it under root folder of the repository.
