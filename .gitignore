@@ -71,3 +71,8 @@ pilot/clients/hfc-key-store/
 
 # npm package.json 
 pilot/package-lock.json
+swarm/node_modules/
+swarm/package-lock.json
+
+# fabric swarm client keystore
+swarm/hfc-key-store/
