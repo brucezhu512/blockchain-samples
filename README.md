@@ -33,3 +33,6 @@ bash ./install-docker-images.sh
 ## List of samples
 ### 1. Pilot
 Basic network for motor assessment process fully driven by CLI implementation with TLS.
+
+### 2. Swarm
+Fabcar network deployed docker swarm.
