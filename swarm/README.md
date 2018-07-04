@@ -1,7 +1,7 @@
 ## Description
 Deploy the network by docker Swarm.
 
-A [swarm](https://docs.docker.com/get-started/part4/)is a group of machines that are running Docker and joined into a cluster. After that has happened, you continue to run the Docker commands you're used to, but now they are executed on a cluster by a swarm manager. The machines in a swarm can be physical or virtual.
+A [swarm](https://docs.docker.com/get-started/part4/) is a group of machines that are running Docker and joined into a cluster. After that has happened, you continue to run the Docker commands you're used to, but now they are executed on a cluster by a swarm manager. The machines in a swarm can be physical or virtual.
 
 The target deployed swarm network is to be:
 ![Swarm network](Swarm_Arch.png "Swarm network")
@@ -62,18 +62,17 @@ vbox2   -        virtualbox   Running   tcp://192.168.99.102:2376           v18.
 vmgr    -        virtualbox   Running   tcp://192.168.99.100:2376           v18.05.0-ce   
 ```
 **Notice**
-If your IPs are **NOT** 192.168.99.100(vmgr), 101 (vbox1), 102(vbox2).. 
-You need to change the actual IP from some JS files:
+If your IPs are **NOT** 192.168.99.100 for vmgr, 101 for vbox1, 102 for vbox2, you will need to change the actual IP from some JS files:
 
 For example 
 ```javascript
 // For example invoke.js
 var channel = fabric_client.newChannel('mychannel');
 //var peer = fabric_client.newPeer('grpc://192.168.99.101:7051');
-var peer = fabric_client.newPeer('grpc://192.168.99.YourVbox1IP:7051');
+var peer = fabric_client.newPeer('grpc://192.168.99.YourVbox1IP:7051'); // Look at it!
 channel.addPeer(peer);
 //var order = fabric_client.newOrderer('grpc://192.168.99.100:7050')
-var order = fabric_client.newOrderer('grpc://192.168.99.YourVmgrIP:7050')
+var order = fabric_client.newOrderer('grpc://192.168.99.YourVmgrIP:7050')  // Look at it!
 channel.addOrderer(order);
 ```
 You need to change all the IPs in 
@@ -86,7 +85,7 @@ invoke.js
 query.js
 ```
 
-Basically, the table below illustrate why these 3 boxes are created:
+Basically, the table below illustrate why these 3 boxes are created in this step:
 
 | Machine       | Role          | Node's functionality |
 | ------------- |:-------------:| -----:|
@@ -96,7 +95,7 @@ Basically, the table below illustrate why these 3 boxes are created:
 
 Step 3
 
-Login into "vmgr" and make it as the manager.
+Login into "vmgr" and make it as a **manager**.
 
 ```bash
 docker-machine ssh vmgr
@@ -120,7 +119,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 Step 4
 
-Login into "vbox1" and "vbox2" and join the network created in step 3
+Login into "vbox1" and "vbox2" and join the network as **workers** created in step 3
 
 ```bash
 docker-machine ssh vbox1
@@ -147,7 +146,7 @@ Step 5
 Get into each docker machine and download the docker images
 
 ```bash
-docker-machine ssh vbox1 # Change the name and do the pull job in each machine 
+docker-machine ssh vbox1 # Change to vmgr / vbox2 as well to pull the docker images. 
 
 docker pull hyperledger/fabric-peer:x86_64-1.0.6
 docker pull hyperledger/fabric-orderer:x86_64-1.0.6
@@ -161,6 +160,8 @@ After this step, you will get all the docker images pulled in your boxes.
 Step 6
 Copy the relevant files into "vmgr", "vbox1" and "vbox2"
 
+Firstly, create the folder from docker machiens
+
 ```bash
 docker-machine ssh vmgr
 mkdir fabcar-swarm
@@ -169,9 +170,11 @@ pwd #Make sure it is /home/docker/fabcar-swarm
 
 # Do the same things for vbox1, vbox2
 ```
-Copy files from local to docker machines:
+Then copy files from local to docker machines:
 
 ```bash
+# Go to swarm folder
+
 docker-machine scp -r -d config/ vmgr:/home/docker/fabcar-swarm/config/
 docker-machine scp -r -d crypto-config/ vmgr:/home/docker/fabcar-swarm/crypto-config/
 docker-machine scp -r -d chaincode/ vmgr:/home/docker/fabcar-swarm/chaincode/
@@ -187,7 +190,7 @@ docker-machine scp -r -d chaincode/ vbox2:/home/docker/fabcar-swarm/chaincode/
 ```
 
 Step 7
-Start up network from "vmgr" (vmgr is a manager node)
+Start up the network from "vmgr" (vmgr is a manager node)
 
 ```bash
 docker-machine ssh vmgr
